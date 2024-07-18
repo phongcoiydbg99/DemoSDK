@@ -5,17 +5,17 @@ import android.view.ViewGroup
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.android.az.demosdk.databinding.ItemMiniappModelBinding
-import com.android.sdk.miniapp.config.model.MiniAppModel
+import com.android.sdk.miniapp.config.model.AZPublicAppModel
 import com.android.sdk.miniapp.extenstions.setImageUrl
 
-class MiniAppModelAdapter(val items: MutableList<MiniAppModel> = mutableListOf()) :
+class MiniAppModelAdapter(val items: MutableList<AZPublicAppModel> = mutableListOf()) :
     RecyclerView.Adapter<ViewHolder>() {
 
-    private var listener: ((miniApp: MiniAppModel?) -> Unit)? = null
+    private var listener: ((miniApp: AZPublicAppModel?) -> Unit)? = null
     private var listenerWithId: ((miniAppId: String?) -> Unit)? = null
 
 
-    fun setListener(listener: (miniApp: MiniAppModel?) -> Unit, listenerWithId: (miniAppId: String?) -> Unit) {
+    fun setListener(listener: (miniApp: AZPublicAppModel?) -> Unit, listenerWithId: (miniAppId: String?) -> Unit) {
         this.listener = listener
         this.listenerWithId = listenerWithId
         this.notifyDataSetChanged()
@@ -28,7 +28,7 @@ class MiniAppModelAdapter(val items: MutableList<MiniAppModel> = mutableListOf()
         holder.bindData(items[position], listener, listenerWithId)
 
     override fun getItemCount() = items.size
-    fun updateData(items: MutableList<MiniAppModel>?) {
+    fun updateData(items: MutableList<AZPublicAppModel>?) {
         items?.let {
             this.items.clear()
             this.items.addAll(it)
@@ -39,8 +39,8 @@ class MiniAppModelAdapter(val items: MutableList<MiniAppModel> = mutableListOf()
 
 class ViewHolder(private val binding: ItemMiniappModelBinding) : RecyclerView.ViewHolder(binding.root) {
     fun bindData(
-        miniApp: MiniAppModel,
-        listener: ((miniApp: MiniAppModel?) -> Unit)? = null,
+        miniApp: AZPublicAppModel,
+        listener: ((miniApp: AZPublicAppModel?) -> Unit)? = null,
         listenerWithId: ((miniAppId: String?) -> Unit)? = null
     ) {
         binding.item.setOnClickListener {

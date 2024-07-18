@@ -1,21 +1,21 @@
 package com.android.az.demosdk
 
 import android.app.Application
-import com.android.sdk.miniapp.config.MiniApp
-import com.android.sdk.miniapp.config.MiniAppConfig
+import com.android.sdk.miniapp.config.AZMiniAppConfig
+import com.android.sdk.miniapp.config.AZMiniAppSDK
 
 class App : Application() {
 
     override fun onCreate() {
         super.onCreate()
 
-        val config = MiniAppConfig.MiniAppConfigBuilder()
-            .deviceId("deviceUniqueID")
-            .userId("userId")
-            .token("token")
-            .domain("http://sdk-api.laoapp.io.vn")
+        val config = AZMiniAppConfig.AZMiniAppConfigBuilder()
+            .setDeviceId("deviceId")
+            .setUserId("userId")
+            .setToken("token")
+            .setDomain("http://sdk-api.laoapp.io.vn")
             .build()
-        MiniApp.create(this)
+        AZMiniAppSDK.create(this)
             .config(config)
             .build()
 

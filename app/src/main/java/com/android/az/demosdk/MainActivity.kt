@@ -7,10 +7,10 @@ import androidx.activity.enableEdgeToEdge
 import androidx.lifecycle.lifecycleScope
 import com.android.az.demosdk.databinding.ActivityMainBinding
 import com.android.sdk.miniapp.common.base.BaseActivity
+import com.android.sdk.miniapp.config.AZMiniAppRepository
+import com.android.sdk.miniapp.config.AZMiniAppSDK
 import com.android.sdk.miniapp.config.Action
-import com.android.sdk.miniapp.config.MiniApp
-import com.android.sdk.miniapp.config.MiniAppRepository
-import com.android.sdk.miniapp.config.model.MiniAppModel
+import com.android.sdk.miniapp.config.model.AZPublicAppModel
 import com.android.sdk.miniapp.config.model.toBundle
 import kotlinx.coroutines.launch
 
@@ -28,33 +28,33 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
 
         binding.items.adapter = miniAppAdapter
         miniAppAdapter.setListener(
-            listener = {miniApp ->
+            listener = { miniApp ->
                 miniApp?.let {
-                    MiniApp.getInstance()
+                    AZMiniAppSDK.getInstance()
                         .action(Action.ACTION_MINI_APP)
-                        .start(this, data = it.toBundle())
+                        .start(this, data = miniApp.toBundle())
                 }
             },
             listenerWithId = {miniAppId ->
                 miniAppId?.let {
-                    MiniApp.getInstance()
+                    AZMiniAppSDK.getInstance()
                         .action(Action.ACTION_MINI_APP)
-                        .start(this, data = MiniAppModel.idToBundle(it))
+                        .start(this, data = AZPublicAppModel.idToBundle(it))
                 }
             }
         )
 
         findViewById<View>(R.id.btnStart).setOnClickListener {
-            MiniApp.getInstance()
+            AZMiniAppSDK.getInstance()
                 .action(Action.ACTION_OPEN)
                 .start(this)
         }
 
         findViewById<View>(R.id.btnCall).setOnClickListener {
             lifecycleScope.launch {
-                val result = MiniAppRepository.fetchMiniApps()
+                val result = AZMiniAppRepository.fetchMiniApps()
                 result.onSuccess { data ->
-                    miniAppAdapter.updateData(items = data.toMutableList())
+                    miniAppAdapter.updateData(items = data?.toMutableList())
                 }.onFailure { exception ->
                     Log.e("TAG", "onCreate: $exception")
                 }

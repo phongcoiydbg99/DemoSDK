@@ -49,5 +49,5 @@ dependencies {
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
 
-    implementation("com.android.sdk:miniapp:1.0.0")
+    implementation("com.android.sdk:miniapp:1.0.1")
 }

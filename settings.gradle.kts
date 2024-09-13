@@ -24,7 +24,7 @@ dependencyResolutionManagement {
         google()
         mavenCentral()
         maven {
-            url = uri("https://maven.pkg.github.com/phongnvazcreative/AZMiniAppSDK")
+            url = uri("https://maven.pkg.github.com/smcunitel/miniapp-android")
             credentials {
                 username = githubProperties.getProperty("gpr.user")
                 password = githubProperties.getProperty("gpr.token")

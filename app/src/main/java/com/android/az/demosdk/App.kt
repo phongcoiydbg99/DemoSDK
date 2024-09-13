@@ -10,14 +10,18 @@ class App : Application() {
         super.onCreate()
 
         val config = AZMiniAppConfig.AZMiniAppConfigBuilder()
-            .setDeviceId("deviceId")
-            .setUserId("userId")
-            .setToken("token")
             .setDomain("http://sdk-api.laoapp.io.vn")
+            .setGetAccessToken {
+                "token"
+            }
+            .setGetClientId {
+                "clientId"
+            }
             .build()
         AZMiniAppSDK.create(this)
             .config(config)
             .build()
+
 
     }
 }
